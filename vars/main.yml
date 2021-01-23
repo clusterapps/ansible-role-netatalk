@@ -1,0 +1,9 @@
+---
+afp_packages:
+  - netatalk
+  - netatalk-devel
+  - avahi
+  - avahi-libs
+  - avahi-devel
+
+

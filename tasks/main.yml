@@ -1,0 +1,62 @@
+---
+- name: Get packages
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ afp_packages }}"
+
+- name: Check for Time Machine directory
+  file:
+    path: "{{ afp_tmpath }}"
+    state: directory
+    group: "{{ afp_tmgroup }}"
+    mode: 775 
+
+- name: Set afpd.service
+  template:
+    src: afpd.service.j2
+    dest: /etc/avahi/services/afpd.service
+  notify: restart netatalk  
+
+- name: Set afpd.conf
+  template:
+    src: afpd.conf.j2
+    dest: /etc/netatalk/afpd.conf
+  notify: restart netatalk  
+
+- name: Set afp.conf
+  template:
+    src: afp.conf.j2
+    dest: /etc/netatalk/afp.conf
+  notify: restart netatalk  
+
+- name: Set AppleVolumes.default
+  template:
+    src: AppleVolumes.default.j2
+    dest: /etc/netatalk/AppleVolumes.default
+  notify: restart netatalk  
+
+- name: Check services
+  service:
+    name: "{{ item }}"
+    enabled: yes
+    state: started
+  with_items:
+    - avahi-daemon
+    - netatalk
+
+- name: Firewall ports
+  firewalld:
+    port: "{{ item }}"
+    permanent: yes
+    state: enabled
+    immediate: yes
+  with_items:
+    - '548/tcp'
+    - '548/udp'
+    - '5353/tcp'
+    - '5353/udp'
+    - '49152/tcp'
+    - '49152/udp'
+    - '52883/tcp'
+    - '52883/udp'

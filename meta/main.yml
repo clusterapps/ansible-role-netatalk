@@ -1,0 +1,22 @@
+galaxy_info:
+  author: Michael Cleary
+  role_name: clusterapps.netatalk
+  description: Setup Netatalk and configure a Time Machine disk on EL8
+  company: ClusterApps
+
+  license: BSD-3-Clause
+
+  min_ansible_version: 2.9
+  platforms:
+    - name: EL
+      versions:
+        - 8
+
+  galaxy_tags:
+    - timemachine
+    - Netatalk
+    - afpd
+
+
+dependencies: []
+
