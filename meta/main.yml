@@ -1,6 +1,6 @@
 galaxy_info:
   author: Michael Cleary
-  role_name: clusterapps.netatalk
+  role_name: netatalk
   description: Setup Netatalk and configure a Time Machine disk on EL8
   company: ClusterApps
 
