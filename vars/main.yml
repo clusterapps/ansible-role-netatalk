@@ -4,6 +4,3 @@ afp_packages:
   - netatalk-devel
   - avahi
   - avahi-libs
-  - avahi-devel
-
-
